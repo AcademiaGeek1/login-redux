@@ -3,8 +3,13 @@ import { Button, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import { useForm } from './hooks/useForm'
+import { useDispatch } from 'react-redux'
+import { login } from './action/action'
 
 const App = () => {
+
+  const dispatch = useDispatch()
+
   const [formValues, handleInputChange] = useForm({
     email: '',
     password: ''
@@ -14,7 +19,7 @@ const App = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    console.log(email, password)
+    dispatch(login(email, password))
   }
   return (
     <div>
@@ -25,6 +30,7 @@ const App = () => {
             type="email"
             placeholder="Enter email"
             name="email"
+            autoComplete="off"
             value={email}
             onChange={handleInputChange}
           />
@@ -32,12 +38,13 @@ const App = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control 
-          type="password" 
-          placeholder="Password" 
-          name="password"
-          value={password}
-          onChange={handleInputChange}
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            autoComplete="off"
+            value={password}
+            onChange={handleInputChange}
           />
         </Form.Group>
         <Button variant="primary" type="submit">
