@@ -1,10 +1,11 @@
 import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Container, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import { useForm } from './hooks/useForm'
 import { useDispatch } from 'react-redux'
 import { login } from './action/action'
+import { loginGoogle } from './action/action'
 
 const App = () => {
 
@@ -20,6 +21,10 @@ const App = () => {
   const handleLogin = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
+  }
+
+  const handleLoginGoogle = () => {
+    dispatch(loginGoogle())
   }
   return (
     <div>
@@ -50,6 +55,16 @@ const App = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Container className="auth__social-networks">
+          <Container
+            className="google-btn"
+            onClick={handleLoginGoogle}
+          >
+            <Container className="google-icon-wrapper">
+              <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+            </Container>
+          </Container>
+        </Container>
       </Form>
     </div>
   )

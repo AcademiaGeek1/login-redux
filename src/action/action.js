@@ -1,4 +1,15 @@
 import { types } from "../types/types"
+import { firebase, google } from "../firebase/firebaseConfig"
+
+export const loginGoogle = () => {
+    return (dispatch) => {
+        firebase.auth().signInWithPopup(google)
+            .then(({ user }) => {
+                console.log("user aca : ", user)
+                dispatch(login(user.uid, user.displayName))
+            })
+    }
+}
 
 export const login = (id, displayName) => {
     return {
